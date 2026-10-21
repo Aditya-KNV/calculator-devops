@@ -1,0 +1,9 @@
+# Files executed on Linux (Jenkins on WSL2, Docker) must keep LF line endings
+* text=auto
+mvnw text eol=lf
+*.sh text eol=lf
+Jenkinsfile text eol=lf
+Dockerfile text eol=lf
+*.yml text eol=lf
+*.cmd text eol=crlf
+*.conf text eol=lf
