@@ -29,7 +29,7 @@ ENV JAVA_OPTS="-XX:MaxRAMPercentage=75"
 EXPOSE 8080
 
 HEALTHCHECK --interval=15s --timeout=3s --start-period=40s --retries=3 \
-  CMD wget -qO- http://localhost:8080/actuator/health | grep -q '"status":"UP"' || exit 1
+  CMD wget -qO- http://127.0.0.1:8080/actuator/health | grep -q '"status":"UP"' || exit 1
 
 # exec so java is PID 1 and receives SIGTERM for graceful shutdown
 ENTRYPOINT ["sh", "-c", "exec java $JAVA_OPTS -jar app.jar"]
