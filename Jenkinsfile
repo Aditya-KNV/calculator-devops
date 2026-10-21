@@ -9,7 +9,7 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'DOCKERHUB_USER', defaultValue: 'your-dockerhub-username',
+        string(name: 'DOCKERHUB_USER', defaultValue: 'aditya6033',
                description: 'Docker Hub namespace the image is pushed to')
     }
 
