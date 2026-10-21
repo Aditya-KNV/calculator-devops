@@ -117,5 +117,5 @@ stack to the desired state; an unchanged image means no container is recreated.
 
 ## 6. Links
 
-- GitHub: `https://github.com/<your-username>/calculator-devops`
+- GitHub: `https://github.com/Aditya-KNV/calculator-devops`
 - Docker Hub: `https://hub.docker.com/r/aditya6033/calculator-api`
