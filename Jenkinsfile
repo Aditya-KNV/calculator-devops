@@ -110,24 +110,14 @@ pipeline {
 
     post {
         success {
-            emailext(
-                to: "${NOTIFY_EMAIL}",
-                subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                mimeType: 'text/html',
-                body: """<p>Build <b>#${env.BUILD_NUMBER}</b> of <b>${env.JOB_NAME}</b> succeeded.</p>
-                         <p>Image: <code>${IMAGE_NAME}:${IMAGE_TAG}</code> deployed at http://localhost:${HOST_PORT}</p>
-                         <p><a href="${env.BUILD_URL}">Open build</a></p>"""
-            )
+            mail to: "${NOTIFY_EMAIL}",
+                 subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: "Build #${env.BUILD_NUMBER} of ${env.JOB_NAME} succeeded.\n\nImage: ${IMAGE_NAME}:${IMAGE_TAG}\nDeployed at: http://localhost:${HOST_PORT}\nBuild: ${env.BUILD_URL}"
         }
         failure {
-            emailext(
-                to: "${NOTIFY_EMAIL}",
-                subject: "FAILURE: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                mimeType: 'text/html',
-                attachLog: true,
-                body: """<p>Build <b>#${env.BUILD_NUMBER}</b> of <b>${env.JOB_NAME}</b> failed.</p>
-                         <p>Console log attached. <a href="${env.BUILD_URL}console">Open console</a></p>"""
-            )
+            mail to: "${NOTIFY_EMAIL}",
+                 subject: "FAILURE: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: "Build #${env.BUILD_NUMBER} of ${env.JOB_NAME} failed.\n\nConsole log: ${env.BUILD_URL}console"
         }
         always {
             sh 'docker image prune -f || true'    // remove dangling layers from repeated builds
